@@ -5,7 +5,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Application;
+namespace Pokemon;
 
 use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
@@ -13,7 +13,7 @@ use Zend\ServiceManager\Factory\InvokableFactory;
 
 return [
     'router' => [
-        'routzaees' => [
+        'routes' => [
             'home' => [
                 'type' => Literal::class,
                 'options' => [
@@ -24,10 +24,10 @@ return [
                     ],
                 ],
             ],
-            'application' => [
+            'pokemon' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route'    => '/application[/:action]',
+                    'route'    => '/pokemon[/:action]',
                     'defaults' => [
                         'controller' => Controller\IndexController::class,
                         'action'     => 'index',
@@ -49,7 +49,7 @@ return [
         'exception_template'       => 'error/index',
         'template_map' => [
             'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
-            'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
+            'pokemon/index/index' => __DIR__ . '/../view/pokemon/index/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
         ],
