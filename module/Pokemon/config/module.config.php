@@ -34,6 +34,55 @@ return [
                     ],
                 ],
             ],
+            'pokemon_add' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/pokemon[/:action]',
+                    'defaults' => [
+                        'controller' => Controller\IndexController::class,
+                        'action'     => 'add',
+                    ],
+                ],
+            ],
+            'pokemon_edit' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'       => 'pokemon[/:action][/:id]',
+                    'constraints' => [
+                        'id' => '[0-9]+'
+                    ],
+                    'defaults'    => [
+                        'controller' => Controller\IndexController::class,
+                        'action'     => 'edit',
+                    ],
+                ],
+            ],
+            'pokemon_view' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'       => 'pokemon[/:action][/:id]',
+                    'constraints' => [
+                        'id' => '[0-9]+'
+                    ],
+                    'defaults'    => [
+                        'controller' => Controller\IndexController::class,
+                        'action'     => 'view',
+                    ],
+                ],
+            ],
+            'pokemon_delete' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'       => 'pokemon/[/:action][/:id]',
+                    'constraints' => [
+                        'id' => '[0-9]+'
+                    ],
+                    'defaults'    => [
+                        'controller' => Controller\IndexController::class,
+                        'action'     => 'delete',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [

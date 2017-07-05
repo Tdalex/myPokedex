@@ -16,4 +16,24 @@ class IndexController extends AbstractActionController
     {
         return new ViewModel();
     }
+
+    public function addAction()
+    {
+    	return new ViewModel();
+    }
+
+    public function editAction()
+    {
+    	return new ViewModel();
+    }
+
+    public function viewAction()
+    {
+    	return new ViewModel();
+    }
+
+    public function deleteAction()
+    {
+    	$this->redirect()->toRoute('home');
+    }
 }
