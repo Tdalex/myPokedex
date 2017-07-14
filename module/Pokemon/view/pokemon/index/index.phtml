@@ -1,1 +1,36 @@
-toto
+<h2>My Pokedex</h2>
+<a class="btn btn-primary" href="<?php echo $this->url('pokemon', array('action'=>'add')); ?>">Ajouter un pokemon</a>
+
+<table class="table">
+    <tr>
+    	<th>Numéro</th>
+        <th>Nom</th>
+        <th>Type 1</th>
+        <th>Type 2</th>
+        <th>Id du parent</th>
+        <th>Description</th>
+        <th>&nbsp;</th>
+    </tr>
+    <?php foreach($pokemons as $pokemon) : ?>
+    <tr>
+        <td><?php
+        	if($pokemon->id < 10)
+        		echo '#00'.$this->escape($pokemon->id);
+        	elseif ($pokemon->id > 9 && $pokemon->id < 100)
+        		echo '#0'.$this->escape($pokemon->id);
+        	else
+        		echo '#'.$this->escape($pokemon->id);
+        	?>         	
+        </td>
+        <td><?php echo $this->escape($pokemon->name) ?></td>
+        <td><?php echo $this->escape($pokemon->type1) ?></td>
+        <td><?php echo $this->escape($pokemon->type2) ?></td>
+        <td><?php echo $this->escape($pokemon->parentId) ?></td>
+        <td><?php echo $this->escape($pokemon->description);?></td>
+        <td>
+            <a href="<?php echo $this->url('pokemon', array('action'=>'edit', 'id' => $pokemon->id));?>">Edit</a>
+            <a href="<?php echo $this->url('pokemon', array('action'=>'delete', 'id' => $pokemon->id));?>">Delete</a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</table>

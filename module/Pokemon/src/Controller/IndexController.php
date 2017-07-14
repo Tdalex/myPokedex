@@ -9,12 +9,22 @@ namespace Pokemon\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Pokemon\Model\PokemonTable;
 
 class IndexController extends AbstractActionController
 {
+    protected $pokemonTable;
+
+    public function __construct(PokemonTable $pokemonTable)
+    {
+        $this->pokemonTable = $pokemonTable;
+    }
+
     public function indexAction()
     {
-        return new ViewModel();
+        return new ViewModel(array(
+            'pokemons' => $this->getPokemonTable()->fetchAll(),
+        ));
     }
 
     public function addAction()
@@ -36,4 +46,6 @@ class IndexController extends AbstractActionController
     {
     	$this->redirect()->toRoute('home');
     }
+
+    
 }

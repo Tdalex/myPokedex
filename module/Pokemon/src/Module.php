@@ -15,4 +15,18 @@ class Module
     {
         return include __DIR__ . '/../config/module.config.php';
     }
+
+    public function getControllerConfig()
+    {
+        return [
+            'factories' => [
+                Controller\IndexController::class => function($container) {
+                    return new Controller\IndexController(
+                        $container->get(Model\PokemonTable::class)
+                    );
+                },
+            ],
+        ];
+    }
 }
+
