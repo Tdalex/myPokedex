@@ -1,0 +1,25 @@
+<h3>New pokedex pokemon</h3>
+
+<?php
+  $form = $this->form;
+  $form->prepare();
+  echo $this->form()->openTag($form); // <form method="POST">
+?>
+<div class="form-group">
+  <?php echo $this->formRow($form->get('name')); ?>
+</div>
+<div class="form-group">
+  <?php echo $this->formRow($form->get('typeA')); ?>
+</div>
+<div class="form-group">
+  <?php echo $this->formRow($form->get('typeB')); ?>
+</div>
+<div class="form-group">
+  <?php echo $this->formRow($form->get('parentId')); ?>
+</div>
+<div class="form-group">
+  <?php echo $this->formRow($form->get('description')); ?>
+</div>
+
+<?php echo $this->formSubmit($form->get('submit')); ?>
+<?php echo $this->form()->closeTag();  // </form> ?>

@@ -1,0 +1,31 @@
+<h3>My Pokedex</h3>
+<a class="btn btn-primary" href="<?php echo $this->url("pokedex_add"); ?>">Add a new pokemon</a>
+
+<?php if (!empty($this->pokemons)) : ?>
+    <?php foreach ($this->pokemons as $pokemon) : ?>
+        <hr />
+        <div class="row">
+            <div class="col-md-5">
+                <strong>
+                    <a href="<?php echo $this->url(
+                      'display_pokemon', [
+                        'pokemonSlug' => $pokemon->getName()
+                      ]); ?>">
+                      <?php echo $this->escapeHtml($pokemon->getName()); ?>
+                    </a>
+                </strong>
+            </div>
+        </div>
+    <?php endforeach; ?>
+<?php else : ?>
+    <div>Nothing to display</div>
+<?php endif; ?>
+<hr />
+<?php
+    echo $this->paginationControl(
+      $this->pokemons,
+      'Sliding',
+      'partial/pagination',
+      ['route' => 'pokedex_home/paged']
+    );
+?>

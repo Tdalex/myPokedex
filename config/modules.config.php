@@ -11,6 +11,9 @@
  * This should be an array of module namespaces used in the application.
  */
 return [
+    'Zend\Cache',
+    'Zend\Serializer',
+    'Zend\Paginator',
     'Zend\ServiceManager\Di',
     'Zend\Mvc\Plugin\FilePrg',
     'Zend\Mvc\Plugin\FlashMessenger',
@@ -30,5 +33,6 @@ return [
     'Zend\Validator',
     'ZendDeveloperTools',
     'Application',
-    'Pokemon'
+    'Pokedex',	
+    'User'
 ];

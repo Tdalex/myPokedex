@@ -13,7 +13,7 @@ use Zend\ServiceManager\Factory\InvokableFactory;
 
 return [
     'router' => [
-        'routzaees' => [
+        'routes' => [
             'home' => [
                 'type' => Literal::class,
                 'options' => [
@@ -42,6 +42,9 @@ return [
         ],
     ],
     'view_manager' => [
+        'strategies' => [
+            'ViewJsonStrategy'
+        ],
         'display_not_found_reason' => true,
         'display_exceptions'       => true,
         'doctype'                  => 'HTML5',
@@ -52,6 +55,7 @@ return [
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
+            'partial/pagination'      => __DIR__ . '/../view/partial/pagination.phtml',
         ],
         'template_path_stack' => [
             __DIR__ . '/../view',
