@@ -69,9 +69,8 @@ return [
       'display_pokemon' => [
         'type' => 'Segment',
         'options' => [
-          'route' => '/pokedex/pokemons/:categorySlug/:pokemonSlug',
+          'route' => '/pokedex/pokemons/:pokemonSlug',
           'contraints' => [
-            'categorySlug'  => '[a-zA-Z0-9-]+',
             'pokemonSlug'      => '[a-zA-Z0-9-]+',
           ],
           'defaults' => [

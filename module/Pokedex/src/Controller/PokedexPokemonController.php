@@ -5,7 +5,6 @@ namespace Pokedex\Controller;
 use Zend\Mvc\Controller\AbstractRestfulController;
 use Zend\View\Model\JsonModel;
 use Pokedex\Entity\Pokemon;
-use Pokedex\Entity\Category;
 use Zend\Cache\StorageFactory;
 
 class PokedexPokemonController extends AbstractRestfulController
@@ -104,14 +103,8 @@ class PokedexPokemonController extends AbstractRestfulController
       }
 
       foreach ($data as $key => $value) {
-        $setter = 'set' . ucfirst($key);
-        if ($key == 'category') {
-          $category = new Category();
-          $category->setId($value);
-          $pokemon->setCategory($category);
-        } elseif (method_exists($pokemon, $setter)) {
-          $pokemon->$setter($value);
-        }
+        $setter = 'set' . ucfirst($key);       
+        $pokemon->$setter($value);
       }
       $this->pokedexService->update($pokemon);
     } catch (\Exception $e) {
@@ -124,25 +117,23 @@ class PokedexPokemonController extends AbstractRestfulController
   protected function pokemonToArray($pokemon)
   {
       return [
-        'id'        => $pokemon->getId(),
-        'title'     => $pokemon->getTitle(),
-        'slug'      => $pokemon->getSlug(),
-        'content'   => $pokemon->getContent(),
-        'created'   => $pokemon->getCreated(),
-        'category'  => $pokemon->getCategory()->getName()
+        'id'          => $object->getId(),
+        'name'        => $object->getName(),
+        'typeA'       => $object->getTypeA(),
+        'typeB'       => $object->getTypeB(),
+        'parent_id'   => $object->getParentId(),
+        'description' => $object->getDescription()
       ];
   }
 
   protected function setPokemon($data)
   {
     $pokemon = new Pokemon();
-    $pokemon->setTitle($data['title']);
-    $pokemon->setSlug($data['slug']);
-    $pokemon->setCreated(time());
-    $pokemon->setContent($data['content']);
-    $category = new Category();
-    $category->setId($data['category']);
-    $pokemon->setCategory($category);
+    $pokemon->setName($data['name']);
+    $pokemon->setTypeA($data['typeA']);
+    $pokemon->setTypeB($data['typeB']);
+    $pokemon->setParentId($data['parentId']);
+    $pokemon->setDescription($data['description']);
 
     return $pokemon;
   }

@@ -9,24 +9,11 @@
                 <strong>
                     <a href="<?php echo $this->url(
                       'display_pokemon', [
-                        'categorySlug' => $pokemon->getCategory()->getSlug(),
-                        'pokemonSlug' => $pokemon->getSlug()
+                        'pokemonSlug' => $pokemon->getName()
                       ]); ?>">
-                      <?php echo $this->escapeHtml($pokemon->getTitle()); ?>
+                      <?php echo $this->escapeHtml($pokemon->getName()); ?>
                     </a>
                 </strong>
-                <?php
-                  $pokemonedAt = $this->dateFormat(
-                    $pokemon->getCreated(),
-                    IntlDateFormatter::MEDIUM,
-                    IntlDateFormatter::MEDIUM,
-                    'en_US'
-                  );
-                  ?>
-                  (<?php echo $pokemonedAt; ?>)
-            </div>
-            <div class="col-md-3">
-                <?php echo $this->escapeHtml($pokemon->getCategory()->getName());?>
             </div>
         </div>
     <?php endforeach; ?>

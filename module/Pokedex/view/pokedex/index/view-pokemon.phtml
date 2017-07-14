@@ -1,13 +1,8 @@
 <?php
 $pokemon = $this->pokemon;
-$pokemonedAt = $this->dateFormat(
-  $pokemon->getCreated(),
-  IntlDateFormatter::MEDIUM,
-  IntlDateFormatter::MEDIUM,
-  'en_US'
-);
+
 ?>
-<h1><?php echo $this->escapeHtml($pokemon->getTitle()); ?></h1>
+<h1><?php echo $this->escapeHtml($pokemon->getName()); ?></h1>
 <a class="btn btn-primary" href="<?php echo $this->url('edit_pokemon', ['pokemonId' => $pokemon->getId()]); ?>">
   <i class="glyphicon glyphicon-pencil"></i> Edit
 </a>
@@ -17,18 +12,7 @@ $pokemonedAt = $this->dateFormat(
 <hr />
 <div class="row">
   <div class="col-md-12">
-    <?php echo nl2br($this->escapeHtml($pokemon->getContent())); ?>
+    <?php echo nl2br($this->escapeHtml($pokemon->getDescription())); ?>
   </div>
 </div>
 <br />
-<div class="row">
-  <div class="col-md-12">
-    Date: <?php echo $pokemonedAt; ?>
-  </div>
-</div>
-<hr />
-<div class="row">
-  <div class="col-md-12">
-    Category: <?php echo $pokemon->getCategory()->getName(); ?>
-  </div>
-</div>

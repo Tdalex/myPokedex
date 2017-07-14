@@ -6,16 +6,19 @@
   echo $this->form()->openTag($form); // <form method="POST">
 ?>
 <div class="form-group">
-  <?php echo $this->formRow($form->get('title')); ?>
+  <?php echo $this->formRow($form->get('name')); ?>
 </div>
 <div class="form-group">
-  <?php echo $this->formRow($form->get('slug')); ?>
+  <?php echo $this->formRow($form->get('typeA')); ?>
 </div>
 <div class="form-group">
-  <?php echo $this->formRow($form->get('content')); ?>
+  <?php echo $this->formRow($form->get('typeB')); ?>
 </div>
 <div class="form-group">
-  <?php echo $this->formRow($form->get('category_id')); ?>
+  <?php echo $this->formRow($form->get('parentId')); ?>
+</div>
+<div class="form-group">
+  <?php echo $this->formRow($form->get('description')); ?>
 </div>
 
 <?php echo $this->formSubmit($form->get('submit')); ?>

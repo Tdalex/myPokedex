@@ -40,7 +40,7 @@ class IndexController extends AbstractActionController
       'form' => $form
     ];
 
-    if ($this->request->isPokemon()) { // if form is submitted
+    if ($this->request->isPost()) { // if form is submitted
         $pokedexPokemon = new Pokemon();
         $form->bind($pokedexPokemon);
 
@@ -62,7 +62,6 @@ class IndexController extends AbstractActionController
   public function viewPokemonAction()
   {
     $pokemon = $this->pokedexService->find(
-      $this->params()->fromRoute('categorySlug'),
       $this->params()->fromRoute('pokemonSlug')
     );
 
@@ -84,7 +83,7 @@ class IndexController extends AbstractActionController
     $form = new Edit();
     $variables = ['form' => $form];
 
-    if ($this->request->isPokemon()) { // FORM HAS BEEN SUBMITTED
+    if ($this->request->isPost()) { // FORM HAS BEEN SUBMITTED
       $pokedexPokemon = new Pokemon();
       $form->bind($pokedexPokemon);
       $form->setInputFilter(new AddPokemon());
@@ -103,9 +102,8 @@ class IndexController extends AbstractActionController
           $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
         } else {
           $form->bind($pokemon);
-          $form->get('slug')->setValue($pokemon->getSlug());
+          $form->get('name')->setValue($pokemon->getName());
           $form->get('id')->setValue($pokemon->getId());
-          $form->get('category_id')->setValue($pokemon->getCategory()->getId());
         }
       }
     return new ViewModel($variables);

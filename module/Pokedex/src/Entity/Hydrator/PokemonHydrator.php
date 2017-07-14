@@ -12,13 +12,14 @@ class PokemonHydrator implements HydratorInterface
       if (!$object instanceof Pokemon) {
         return [];
       }
-
+	  
       return [
-        'id'        => $object->getId(),
-        'title'     => $object->getTitle(),
-        'slug'      => $object->getSlug(),
-        'content'   => $object->getContent(),
-        'created'   => $object->getCreated()
+        'id'          => $object->getId(),
+        'name'        => $object->getName(),
+        'typeA'       => $object->getTypeA(),
+        'typeB'       => $object->getTypeB(),
+        'parent_id'   => $object->getParentId(),
+        'description' => $object->getDescription()
       ];
   }
 
@@ -29,10 +30,11 @@ class PokemonHydrator implements HydratorInterface
     }
 
     $object->setId(isset($data['id']) ? intval($data['id']) : null);
-    $object->setTitle(isset($data['title']) ? $data['title'] : null);
-    $object->setSlug(isset($data['slug']) ? $data['slug'] : null);
-    $object->setContent(isset($data['content']) ? $data['content'] : null);
-    $object->setCreated(isset($data['created']) ? intval($data['created']) : null);
+    $object->setName(isset($data['name']) ? $data['name'] : null);
+    $object->setTypeA(isset($data['typeA']) ? $data['typeA'] : null);
+    $object->setTypeB(isset($data['typeB']) ? $data['typeB'] : null);
+    $object->setParentId(isset($data['parent_id']) ? intval($data['parent_id']) : null);
+    $object->setDescription(isset($data['description']) ? intval($data['description']) : null);
 
     return $object;
   }

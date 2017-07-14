@@ -37,9 +37,9 @@ class PokedexServiceImpl implements PokedexService
   /**
    * @return Pokemon|null
    */
-  public function find($categorySlug, $pokemonSlug)
+  public function find($pokemonSlug)
   {
-    return $this->pokemonRepository->find($categorySlug, $pokemonSlug);
+    return $this->pokemonRepository->find($pokemonSlug);
   }
 
   /**

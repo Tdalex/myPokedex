@@ -16,6 +16,7 @@
         "zendframework/zend-component-installer": "^1.0 || ^0.7 || ^1.0.0-dev@dev",
         "zendframework/zend-mvc": "^3.0.1",
         "zfcampus/zf-development-mode": "^3.0",
+        "zendframework/zend-cache": "^2.7",
         "zendframework/zend-db": "^2.8.1",
         "zendframework/zend-mvc-form": "^1.0",
         "zendframework/zend-json": "^3.0",
@@ -25,18 +26,21 @@
         "zendframework/zend-mvc-plugins": "^1.0.1",
         "zendframework/zend-psr7bridge": "^0.2.2",
         "zendframework/zend-session": "^2.7.1",
-        "zendframework/zend-servicemanager-di": "^1.0"
+        "zendframework/zend-servicemanager-di": "^1.0",
+        "zendframework/zend-form": "^2.10",
+        "zendframework/zend-paginator": "^2.7",
+        "zendframework/zend-i18n": "^2.7",
+        "zendframework/zend-crypt": "^3.2",
+        "zendframework/zend-serializer": "^2.8"
     },
     "autoload": {
         "psr-4": {
-            "Application\\": "module/Application/src/",
-            "Pokemon\\": "module/Pokemon/src/"
+            "Application\\": "module/Application/src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ApplicationTest\\": "module/Application/test/",
-            "Pokemon\\": "module/Pokemon/test/"
+            "ApplicationTest\\": "module/Application/test/"
         }
     },
     "extra": [],

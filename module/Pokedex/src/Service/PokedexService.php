@@ -15,7 +15,7 @@ interface PokedexService
   /**
    * @return Pokemon|null
    */
-  public function find($categorySlug, $pokemonSlug);
+  public function find($pokemonSlug);
 
   /**
    * @return Pokemon|null

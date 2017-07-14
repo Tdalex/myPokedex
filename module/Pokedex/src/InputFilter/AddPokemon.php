@@ -13,27 +13,21 @@ class AddPokemon extends InputFilter
 {
   public function __construct()
   {
-      $title = new Input('title');
-      $title->setRequired(true);
-      $title->setFilterChain($this->getStringTrimFilterChain());
-      $title->setValidatorChain($this->getTitleValidatorChain());
+      $name = new Input('name');
+      $name->setRequired(true);
+      $name->setFilterChain($this->getStringTrimFilterChain());
+      $name->setValidatorChain($this->getNameValidatorChain());
 
-      $slug = new Input('slug');
-      $slug->setRequired(true);
-      $slug->setFilterChain($this->getStringTrimFilterChain());
-      $slug->setValidatorChain($this->getSlugValidatorChain());
+      $description = new Input('description');
+      $description->setRequired(true);
+      $description->setFilterChain($this->getStringTrimFilterChain());
+      $description->setValidatorChain($this->getDescriptionValidatorChain());
 
-      $content = new Input('content');
-      $content->setRequired(true);
-      $content->setFilterChain($this->getStringTrimFilterChain());
-      $content->setValidatorChain($this->getContentValidatorChain());
-
-      $this->add($title);
-      $this->add($slug);
-      $this->add($content);
+      $this->add($name);
+      $this->add($description);
   }
 
-  protected function getTitleValidatorChain()
+  protected function getNameValidatorChain()
   {
       $stringLength = new StringLength();
       $stringLength->setMin(5);
@@ -46,19 +40,7 @@ class AddPokemon extends InputFilter
       return $validatorChain;
   }
 
-  protected function getSlugValidatorChain()
-  {
-    $stringLength = new StringLength();
-    $stringLength->setMin(5);
-    $stringLength->setMax(50);
-
-    $validatorChain = new ValidatorChain();
-    $validatorChain->attach($stringLength);
-
-    return $validatorChain;
-  }
-
-  protected function getContentValidatorChain()
+  protected function getDescriptionValidatorChain()
   {
     $stringLength = new StringLength();
     $stringLength->setMin(10);

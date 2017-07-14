@@ -2,7 +2,6 @@
 
 namespace Pokedex\Repository;
 
-use Pokedex\Entity\Hydrator\CategoryHydrator;
 use Pokedex\Entity\Hydrator\PokemonHydrator;
 use Zend\Hydrator\Aggregate\AggregateHydrator;
 use Zend\Db\ResultSet\HydratingResultSet;
@@ -25,11 +24,11 @@ class PokemonRepositoryImpl implements PokemonRepository
       $sql = new \Zend\Db\Sql\Sql($this->adapter);
       $insert = $sql->insert()
         ->values([
-          'title' => $pokemon->getTitle(),
-          'slug'  => $pokemon->getSlug(),
-          'content' => $pokemon->getContent(),
-          'category_id' => $pokemon->getCategory()->getId(),
-          'created' => time()
+          'name'        => $pokemon->getName(),
+          'typeA'       => $pokemon->getTypeA(),
+          'typeB'       => $pokemon->getTypeB(),
+          'parent_id'   => $pokemon->getParentId(),
+          'description' => $pokemon->getDescription()
         ])
         ->into('pokemon');
      $statement = $sql->prepareStatementForSqlObject($insert);
@@ -51,18 +50,13 @@ class PokemonRepositoryImpl implements PokemonRepository
           'id',
       ])->from([
         'p' => 'pokemon'
-      ])->join(
-          ['c' => 'category'], // table name
-          'c.id = p.category_id',
-          ['category_id' => 'id', 'name', 'category_slug' => 'slug'] // column alias
-      );
+      ]);
 
       $statement = $sql->prepareStatementForSqlObject($select);
       $result = $statement->execute();
 
       $hydrator = new AggregateHydrator();
       $hydrator->add(new PokemonHydrator());
-      $hydrator->add(new CategoryHydrator());
       $resultSet = new HydratingResultSet($hydrator, new Pokemon());
       $resultSet->initialize($result);
 
@@ -78,61 +72,53 @@ class PokemonRepositoryImpl implements PokemonRepository
 
   public function fetch($page)
   {
-	  return array();
-      $sql = new \Zend\Db\Sql\Sql($this->adapter);
-      $select = $sql->select();
-      $select->columns([
-          'id',
-          'title',
-          'slug',
-          'content',
-          'created'
-      ])->from([
-        'p' => 'pokemon'
-      ])->join(
-          ['c' => 'category'], // table name
-          'c.id = p.category_id',
-          ['category_id' => 'id', 'name', 'category_slug' => 'slug'] // column alias
-      );
+	  $sql = new \Zend\Db\Sql\Sql($this->adapter);
+	  $select = $sql->select();
+	  $select->columns([
+		  'id',
+		  'name',
+		  'typeA',
+		  'typeB',
+		  'parent_id',
+		  'description'
+	  ])->from([
+		'p' => 'pokemon'
+	  ]);
 
-      $hydrator = new AggregateHydrator();
-      $hydrator->add(new PokemonHydrator());
-      $hydrator->add(new CategoryHydrator());
-      $resultSet = new HydratingResultSet($hydrator, new Pokemon());
+	  $hydrator = new AggregateHydrator();
+	  $hydrator->add(new PokemonHydrator());
+	  $resultSet = new HydratingResultSet($hydrator, new Pokemon());
 
-        $paginatorAdapter = new \Zend\Paginator\Adapter\DbSelect(
-            $select,
-            $this->adapter,
-            $resultSet
-          );
-          $paginator = new \Zend\Paginator\Paginator($paginatorAdapter);
-          $paginator->setCurrentPageNumber($page);
-          $paginator->setItemCountPerPage(3);
+		$paginatorAdapter = new \Zend\Paginator\Adapter\DbSelect(
+			$select,
+			$this->adapter,
+			$resultSet
+		  );
+		  $paginator = new \Zend\Paginator\Paginator($paginatorAdapter);
+		  $paginator->setCurrentPageNumber($page);
+		  $paginator->setItemCountPerPage(3);
 
-          return $paginator;
+		  return $paginator;
   }
 
   /**
    * @return Pokemon|null
    */
-  public function find($categorySlug, $pokemonSlug)
+  public function find($pokemonSlug)
   {
       $sql = new \Zend\Db\Sql\Sql($this->adapter);
       $select = $sql->select();
       $select->columns([
-        'id',
-        'title',
-        'slug',
-        'content',
-        'created'
+		  'id',
+		  'name',
+		  'typeA',
+		  'typeB',
+		  'parent_id',
+		  'description'
       ])->from(
         ['p' => 'pokemon']
-      )->join(
-        ['c' => 'category'], // TABLE NAME
-        'c.id = p.category_id', // JOIN CONDITION
-        ['category_id' => 'id', 'name', 'category_slug' => 'slug']
       )->where(
-        [ 'c.slug' => $categorySlug, 'p.slug' => $pokemonSlug]
+        ['p.name' => $pokemonSlug]
       );
 
       $statement = $sql->prepareStatementForSqlObject($select);
@@ -140,7 +126,6 @@ class PokemonRepositoryImpl implements PokemonRepository
 
       $hydrator = new AggregateHydrator();
       $hydrator->add(new PokemonHydrator());
-      $hydrator->add(new CategoryHydrator());
 
       $resultSet = new HydratingResultSet($hydrator, new Pokemon());
       $resultSet->initialize($results);
@@ -157,16 +142,13 @@ class PokemonRepositoryImpl implements PokemonRepository
     $select = $sql->select();
     $select->columns([
       'id',
-      'title',
-      'slug',
-      'content',
-      'created'
+	  'name',
+	  'typeA',
+	  'typeB',
+	  'parent_id',
+	  'description'
     ])->from(
       ['p' => 'pokemon']
-    )->join(
-      ['c' => 'category'], // TABLE NAME
-      'c.id = p.category_id', // JOIN CONDITION
-      ['category_id' => 'id', 'name', 'category_slug' => 'slug']
     )->where(
       [ 'p.id' => $pokemonId ]
     );
@@ -176,7 +158,6 @@ class PokemonRepositoryImpl implements PokemonRepository
 
     $hydrator = new AggregateHydrator();
     $hydrator->add(new PokemonHydrator());
-    $hydrator->add(new CategoryHydrator());
 
     $resultSet = new HydratingResultSet($hydrator, new Pokemon());
     $resultSet->initialize($results);
@@ -189,10 +170,11 @@ class PokemonRepositoryImpl implements PokemonRepository
     $sql = new \Zend\Db\Sql\Sql($this->adapter);
     $update = $sql->update('pokemon')
       ->set([
-        'title'       => $pokemon->getTitle(),
-        'slug'        => $pokemon->getSlug(),
-        'content'     => $pokemon->getContent(),
-        'category_id' => $pokemon->getCategory()->getId()
+		  'name'        => $pokemon->getName(),
+		  'typeA'       => $pokemon->getTypeA(),
+		  'typeB'       => $pokemon->getTypeB(),
+		  'parent_id'   => $pokemon->getParentId(),
+		  'description' => $pokemon->getDescription()
       ])->where([
         'id' => $pokemon->getId()
       ]);
