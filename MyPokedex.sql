@@ -28,9 +28,7 @@ CREATE TABLE IF NOT EXISTS `MyPokedex`.`Pokemon` (
   `Type1` VARCHAR(45) NOT NULL,
   `Type2` VARCHAR(45) NULL,
   `Parent_id` INT NULL,
-  `Sprite` VARCHAR(2000) NOT NULL,
   `Description` VARCHAR(500) NOT NULL,
-  `Icone` VARCHAR(2000) NOT NULL,
   PRIMARY KEY (`Id_Pokemon`))
 ENGINE = InnoDB;
 
