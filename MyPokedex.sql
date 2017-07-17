@@ -244,7 +244,8 @@ ALTER TABLE `user`
 --
 -- AUTO_INCREMENT pour les tables exportées
 --
-
+ALTER TABLE `pokemon`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `lastseen`
 --

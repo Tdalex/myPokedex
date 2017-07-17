@@ -70,7 +70,7 @@ class Add extends Form
     $description->setLabel('Description');
     $description->setAttribute('class', 'form-control');
 	
-	$parentId = new Element\Text('parentId');
+	$parentId = new Element\Text('parent_id');
     $parentId->setLabel('Id parent');
     $parentId->setAttribute('class', 'form-control');
 	

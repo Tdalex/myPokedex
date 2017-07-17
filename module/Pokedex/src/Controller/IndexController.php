@@ -48,16 +48,15 @@ class IndexController extends AbstractActionController
 
         $data = $this->request->getPost(); // key value array
         $form->setData($data);
-
         if ($form->isValid()) {
           $this->pokedexService->save($pokedexPokemon);
-
           return $this->redirect()->toRoute('pokedex_home');
         }
     }
 
     return new ViewModel($variables);
   }
+
 
   public function viewPokemonAction()
   {
