@@ -18,63 +18,64 @@ class Add extends Form
 
     $this->setHydrator($hydrator);
 	
-	$name = new Element\Text('Nom');
-    $name->setLabel('name');
+	$name = new Element\Text('name');
+    $name->setLabel('Nom');
     $name->setAttribute('class', 'form-control');
 
-    $typeA = new Element\Text('Type 1');
-    $typeA->setLabel('typeA');
+    $typeA = new Element\Select('typeA');
+    $typeA->setLabel('Type 1');
     $typeA->setAttribute('class', 'form-control');
-    // $typeA->setValueOptions([
-      // 'feu'     => 'feu',
-      // 'eau'     => 'eau',
-      // 'plante'  => 'plante',
-      // 'roche'   => 'roche',
-      // 'spectre' => 'spectre',
-      // 'vol'     => 'vol',
-      // 'foudre'  => 'foudre',
-	  // 'dragon'  => 'dragon',
-      // 'combat'  => 'combat',
-      // 'normal'  => 'normal',
-      // 'sol'     => 'sol',
-      // 'psy'     => 'psy',
-      // 'insecte' => 'insecte',
-      // 'poison'  => 'poison',
-      // 'glace'   => 'glace',
-    // ]);
+    $typeA->setValueOptions([
+      null      => '',
+      'Feu'     => 'Feu',
+      'Eau'     => 'Eau',
+      'Plante'  => 'Plante',
+      'Roche'   => 'Roche',
+      'Spectre' => 'Spectre',
+      'Vol'     => 'Vol',
+      'Foudre'  => 'Foudre',
+	    'Dragon'  => 'Dragon',
+      'Combat'  => 'Combat',
+      'Normal'  => 'Normal',
+      'Sol'     => 'Sol',
+      'Psy'     => 'Psy',
+      'Insecte' => 'Insecte',
+      'Poison'  => 'Poison',
+      'Glace'   => 'Glace',
+    ]);
 	
-    $typeB = new Element\Textarea('Type 2');
-    $typeB->setLabel('typeB');
+    $typeB = new Element\Select('typeB');
+    $typeB->setLabel('Type 2');
     $typeB->setAttribute('class', 'form-control');
-    // $typeB->setValueOptions([
-      // ''        => '',
-      // 'feu'     => 'feu',
-      // 'eau'     => 'eau',
-      // 'plante'  => 'plante',
-      // 'roche'   => 'roche',
-      // 'spectre' => 'spectre',
-      // 'vol'     => 'vol',
-      // 'foudre'  => 'foudre',
-	  // 'dragon'  => 'dragon',
-      // 'combat'  => 'combat',
-      // 'normal'  => 'normal',
-      // 'sol'     => 'sol',
-      // 'psy'     => 'psy',
-      // 'insecte' => 'insecte',
-      // 'poison'  => 'poison',
-      // 'glace'   => 'glace',
-    // ]);
+    $typeB->setValueOptions([
+      null      => '',
+      'Feu'     => 'Feu',
+      'Eau'     => 'Eau',
+      'Plante'  => 'Plante',
+      'Roche'   => 'Roche',
+      'Spectre' => 'Spectre',
+      'Vol'     => 'Vol',
+      'Foudre'  => 'Foudre',
+	    'Dragon'  => 'Dragon',
+      'Combat'  => 'Combat',
+      'Normal'  => 'Normal',
+      'Sol'     => 'Sol',
+      'Psy'     => 'Psy',
+      'Insecte' => 'Insecte',
+      'Poison'  => 'Poison',
+      'Glace'   => 'Glace',
+    ]);
 	
-    $description = new Element\Select('Description');
-    $description->setLabel('description');
+    $description = new Element\Textarea('description');
+    $description->setLabel('Description');
     $description->setAttribute('class', 'form-control');
 	
-	$parentId = new Element\Select('Id parent');
-    $parentId->setLabel('parentId');
+	$parentId = new Element\Text('parentId');
+    $parentId->setLabel('Id parent');
     $parentId->setAttribute('class', 'form-control');
 	
-    $submit = new Element\Submit('Confirmer');
-    $submit->setValue('Mettre a jour le pokemon');
+    $submit = new Element\Submit('submit');
+    $submit->setValue('Confirmer');
     $submit->setAttribute('class', 'btn btn-primary');
 
     $this->add($name);
