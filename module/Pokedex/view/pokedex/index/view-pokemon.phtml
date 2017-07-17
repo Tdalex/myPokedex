@@ -12,7 +12,15 @@ $pokemon = $this->pokemon;
 <hr />
 <div class="row">
   <div class="col-md-12">
+  <!-- ID National -->
     <?php echo nl2br($this->escapeHtml($pokemon->getDescription())); ?>
+    <?php echo nl2br($this->escapeHtml($pokemon->getName())); ?>
+    <?php echo nl2br($this->escapeHtml($pokemon->getTypeA())); ?>
+    <!-- if existe -->
+    <?php echo nl2br($this->escapeHtml($pokemon->getTypeB())); ?>
+    <?php echo nl2br($this->escapeHtml($pokemon->getDescription())); ?>
+    <!-- récupérer les évolutions -->
+    <?php echo 'Evolutions ...' ?>
   </div>
 </div>
 <br />

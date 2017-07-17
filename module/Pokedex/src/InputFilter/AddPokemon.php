@@ -23,8 +23,12 @@ class AddPokemon extends InputFilter
       $description->setFilterChain($this->getStringTrimFilterChain());
       $description->setValidatorChain($this->getDescriptionValidatorChain());
 
+      $typeB = new Input('typeB');
+      $typeB->setRequired(false);
+
       $this->add($name);
       $this->add($description);
+      $this->add($typeB);
   }
 
   protected function getNameValidatorChain()

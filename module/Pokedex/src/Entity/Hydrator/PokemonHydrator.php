@@ -34,7 +34,7 @@ class PokemonHydrator implements HydratorInterface
     $object->setTypeA(isset($data['typeA']) ? $data['typeA'] : null);
     $object->setTypeB(isset($data['typeB']) ? $data['typeB'] : null);
     $object->setParentId(isset($data['parent_id']) ? intval($data['parent_id']) : null);
-    $object->setDescription(isset($data['description']) ? intval($data['description']) : null);
+    $object->setDescription(isset($data['description']) ? $data['description'] : null);
 
     return $object;
   }

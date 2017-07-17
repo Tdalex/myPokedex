@@ -26,7 +26,6 @@ class Add extends Form
     $typeA->setLabel('Type 1');
     $typeA->setAttribute('class', 'form-control');
     $typeA->setValueOptions([
-      null      => '',
       'Feu'     => 'Feu',
       'Eau'     => 'Eau',
       'Plante'  => 'Plante',
@@ -48,7 +47,7 @@ class Add extends Form
     $typeB->setLabel('Type 2');
     $typeB->setAttribute('class', 'form-control');
     $typeB->setValueOptions([
-      null      => '',
+      ''      => '',
       'Feu'     => 'Feu',
       'Eau'     => 'Eau',
       'Plante'  => 'Plante',
@@ -65,6 +64,7 @@ class Add extends Form
       'Poison'  => 'Poison',
       'Glace'   => 'Glace',
     ]);
+
 	
     $description = new Element\Textarea('description');
     $description->setLabel('Description');

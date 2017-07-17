@@ -46,7 +46,7 @@ class IndexController extends AbstractActionController
 
         $form->setInputFilter(new AddPokemon());
 
-        $data = $this->request->getPokemon(); // key value array
+        $data = $this->request->getPost(); // key value array
         $form->setData($data);
 
         if ($form->isValid()) {
@@ -87,7 +87,7 @@ class IndexController extends AbstractActionController
       $pokedexPokemon = new Pokemon();
       $form->bind($pokedexPokemon);
       $form->setInputFilter(new AddPokemon());
-      $data = $this->request->getPokemon();
+      $data = $this->request->getPost();
       $form->setData($data); // KEY VALUE ARRAY
       if ($form->isValid()) {
         $this->pokedexService->update($pokedexPokemon);
