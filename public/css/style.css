@@ -31,3 +31,93 @@ div.container a.navbar-brand > img {
     margin-right: 4px;
     margin-top: -2px;
 }
+
+#pokemons .col-md-3 {
+    box-shadow: 10px 10px 3px #ddd;
+    height: 200px;
+    margin-bottom: 30px;
+    margin-left: 50px;
+}
+
+.types {
+    width: 100%;
+    /*border: 1px solid red;*/
+}
+
+.col-md-2 {
+    border-radius: 10px;
+    margin-left: 10px;
+}
+
+.Plante {
+    background-color: #57ef6b;
+}
+
+.Feu {
+    background-color: #fe2d2d;
+}
+
+.Eau {
+    background-color: #5e66dc;
+}
+
+.Poison {
+    background-color: #ef64fe;
+}
+
+.Acier {
+    background-color: #ccc;
+}
+
+.Combat {
+    background-color: #a64812;
+}
+
+.Dragon {
+    background-color: #a80dc7;
+}
+
+.Electrique {
+    background-color: #f9f34b;
+}
+
+.Fée {
+    background-color: #fe86ca;
+}
+
+.Glace {
+    background-color: #61f4f4;
+}
+
+.Insecte {
+    background-color: #86c064;
+}
+
+.Normal {
+    background-color: #818281;
+}
+
+.Psy {
+    background-color: #fe29a9;
+}
+
+.Roche {
+    background-color: #bfa873;
+}
+
+.Sol {
+    background-color: #f0cf83;
+}
+
+.Spectre {
+    background-color: #ddb5e5;
+}
+
+.Ténèbres {
+    background-color: #4c4c4c;
+    color: white;
+}
+
+.Vol {
+    background-color: #b7b4fe;
+}

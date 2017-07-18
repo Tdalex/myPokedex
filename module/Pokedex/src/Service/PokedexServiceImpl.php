@@ -59,4 +59,12 @@ class PokedexServiceImpl implements PokedexService
   {
     $this->pokemonRepository->delete($pokemonId);
   }
+
+  /**
+   * @return Pokemon|null
+   */
+  public function findEvolution($pokemonId)
+  {
+    return $this->pokemonRepository->findEvolution($pokemonId);
+  }
 }

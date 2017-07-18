@@ -17,7 +17,11 @@ class Edit extends Form
     $hydrator->add(new PokemonHydrator());
     $this->setHydrator($hydrator);
 
-    $id = new Element\Hidden('ID');
+    $id = new Element\Hidden('id');
+
+    $idNational = new Element\Text('id_national');
+    $idNational->setLabel('Id national');
+    $idNational->setAttribute('class', 'form-control');
 
     $name = new Element\Text('name');
     $name->setLabel('Nom');
@@ -27,7 +31,6 @@ class Edit extends Form
     $typeA->setLabel('Type 1');
     $typeA->setAttribute('class', 'form-control');
     $typeA->setValueOptions([
-      null      => '',
       'Feu'     => 'Feu',
       'Eau'     => 'Eau',
       'Plante'  => 'Plante',
@@ -49,7 +52,7 @@ class Edit extends Form
     $typeB->setLabel('Type 2');
     $typeB->setAttribute('class', 'form-control');
     $typeB->setValueOptions([
-      null      => '',
+      NULL      => '',
       'Feu'     => 'Feu',
       'Eau'     => 'Eau',
       'Plante'  => 'Plante',
@@ -80,6 +83,7 @@ class Edit extends Form
     $submit->setAttribute('class', 'btn btn-primary');
 
     $this->add($id);
+    $this->add($idNational);
     $this->add($name);
     $this->add($typeA);
     $this->add($typeB);

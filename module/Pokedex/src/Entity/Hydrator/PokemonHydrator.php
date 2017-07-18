@@ -15,6 +15,7 @@ class PokemonHydrator implements HydratorInterface
 	  
       return [
         'id'          => $object->getId(),
+        'id_national' => $object->getIdNational(),
         'name'        => $object->getName(),
         'typeA'       => $object->getTypeA(),
         'typeB'       => $object->getTypeB(),
@@ -30,6 +31,7 @@ class PokemonHydrator implements HydratorInterface
     }
 
     $object->setId(isset($data['id']) ? intval($data['id']) : null);
+    $object->setIdNational(isset($data['id_national']) ? intval($data['id_national']) : null);
     $object->setName(isset($data['name']) ? $data['name'] : null);
     $object->setTypeA(isset($data['typeA']) ? $data['typeA'] : null);
     $object->setTypeB(isset($data['typeB']) ? $data['typeB'] : null);

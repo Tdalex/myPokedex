@@ -10,17 +10,72 @@ $pokemon = $this->pokemon;
   <i class="glyphicon glyphicon-remove"></i> Delete
 </a>
 <hr />
-<div class="row">
-  <div class="col-md-12">
+<div class="col-md-3">
+  <img src="/img/sprites/<?php echo $pokemon->getIdNational(); ?>.gif">
+</div>
+  <div class="col-md-9">
   <!-- ID National -->
-    <?php echo nl2br($this->escapeHtml($pokemon->getDescription())); ?>
+  <div class="header">
+    <?php 
+      $idNational = $pokemon->getIdNational();
+      if ($idNational < 10)
+        echo '#00'.$this->escapeHtml($idNational);
+      elseif ($idNational > 9 && $idNational < 100)
+        echo '#0'.$this->escapeHtml($idNational);
+      else
+        echo '#'. $this->escapeHtml($idNational);
+    ?>
     <?php echo nl2br($this->escapeHtml($pokemon->getName())); ?>
-    <?php echo nl2br($this->escapeHtml($pokemon->getTypeA())); ?>
-    <!-- if existe -->
-    <?php echo nl2br($this->escapeHtml($pokemon->getTypeB())); ?>
+  </div>
+  <div class="types">
+    <div class="col-md-2 <?php echo $pokemon->getTypeA(); ?>">
+      <?php echo nl2br($this->escapeHtml($pokemon->getTypeA())); ?>
+    </div>
+    <?php
+      $typeB = $pokemon->getTypeB();
+      if ($typeB != null || $typeB != '') {
+      ?>
+      <div class="col-md-2 <?php echo $pokemon->getTypeB(); ?>">
+        <?php
+          echo $this->escapeHtml($typeB);
+        ?>
+      </div>
+      <?php
+      }
+    ?>
+  </div>
+  <br>
+  <div class="description">
     <?php echo nl2br($this->escapeHtml($pokemon->getDescription())); ?>
+  </div>
     <!-- récupérer les évolutions -->
-    <?php echo 'Evolutions ...' ?>
+    <h4>Evolutions :</h4>
+    <?php if ($evolution != null){ ?>
+      <strong>
+        <a href="<?php echo $this->url(
+          'display_pokemon', [
+            'pokemonSlug' => $evolution->getName()
+          ]); ?>">
+          <?php echo $this->escapeHtml($evolution->getName()); ?>
+        </a>
+      </strong>
+    <?php
+      if($evolutionB != null) {
+        echo ', ';
+    ?>
+      <strong>
+        <a href="<?php echo $this->url(
+          'display_pokemon', [
+            'pokemonSlug' => $evolutionB->getName()
+          ]); ?>">
+          <?php echo $this->escapeHtml($evolutionB->getName()); ?>
+        </a>
+      </strong>
+    <?php
+      }
+    } else
+      echo 'aucune évolution pour ce pokemon.';
+    ?>
   </div>
 </div>
 <br />

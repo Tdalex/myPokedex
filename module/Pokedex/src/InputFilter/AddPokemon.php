@@ -26,9 +26,13 @@ class AddPokemon extends InputFilter
       $typeB = new Input('typeB');
       $typeB->setRequired(false);
 
+      $idNational = new Input('id_national');
+      $idNational->setRequired(false);
+
       $this->add($name);
       $this->add($description);
       $this->add($typeB);
+      $this->add($idNational);
   }
 
   protected function getNameValidatorChain()

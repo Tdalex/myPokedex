@@ -6,6 +6,9 @@
   echo $this->form()->openTag($form); // <form method="POST">
 ?>
 <div class="form-group">
+  <?php echo $this->formRow($form->get('id_national')); ?>
+</div>
+<div class="form-group">
   <?php echo $this->formRow($form->get('name')); ?>
 </div>
 <div class="form-group">

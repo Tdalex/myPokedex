@@ -24,6 +24,7 @@ class PokemonRepositoryImpl implements PokemonRepository
       $sql = new \Zend\Db\Sql\Sql($this->adapter);
       $insert = $sql->insert()
         ->values([
+          'id_national' => $pokemon->getIdNational(),
           'name'        => $pokemon->getName(),
           'typeA'       => $pokemon->getTypeA(),
           'typeB'       => $pokemon->getTypeB(),
@@ -76,6 +77,7 @@ class PokemonRepositoryImpl implements PokemonRepository
 	  $select = $sql->select();
 	  $select->columns([
 		  'id',
+      'id_national',
 		  'name',
 		  'typeA',
 		  'typeB',
@@ -96,7 +98,7 @@ class PokemonRepositoryImpl implements PokemonRepository
 		  );
 		  $paginator = new \Zend\Paginator\Paginator($paginatorAdapter);
 		  $paginator->setCurrentPageNumber($page);
-		  $paginator->setItemCountPerPage(3);
+		  $paginator->setItemCountPerPage(9);
 
 		  return $paginator;
   }
@@ -110,6 +112,7 @@ class PokemonRepositoryImpl implements PokemonRepository
       $select = $sql->select();
       $select->columns([
 		  'id',
+      'id_national',
 		  'name',
 		  'typeA',
 		  'typeB',
@@ -142,6 +145,7 @@ class PokemonRepositoryImpl implements PokemonRepository
     $select = $sql->select();
     $select->columns([
       'id',
+      'id_national',
 	  'name',
 	  'typeA',
 	  'typeB',
@@ -170,6 +174,7 @@ class PokemonRepositoryImpl implements PokemonRepository
     $sql = new \Zend\Db\Sql\Sql($this->adapter);
     $update = $sql->update('pokemon')
       ->set([
+      'id_national' => $pokemon->getIdNational(),
 		  'name'        => $pokemon->getName(),
 		  'typeA'       => $pokemon->getTypeA(),
 		  'typeB'       => $pokemon->getTypeB(),
@@ -194,5 +199,37 @@ class PokemonRepositoryImpl implements PokemonRepository
 
         $statement = $sql->prepareStatementForSqlObject($delete);
         $statement->execute();
+  }
+
+  /**
+   * @return Pokemon|null
+   */
+  public function findEvolution($pokemonId)
+  {
+      $sql = new \Zend\Db\Sql\Sql($this->adapter);
+      $select = $sql->select();
+      $select->columns([
+      'id_national',
+      'name',
+      'typeA',
+      'typeB',
+      'description'
+      ])->from(
+        ['p' => 'pokemon']
+      )->where(
+        ['p.parent_id' => $pokemonId]
+      );
+
+      $statement = $sql->prepareStatementForSqlObject($select);
+      $results = $statement->execute();
+
+      $hydrator = new AggregateHydrator();
+      $hydrator->add(new PokemonHydrator());
+
+      $resultSet = new HydratingResultSet($hydrator, new Pokemon());
+      $resultSet->initialize($results);
+
+      //changer le resultset->current pour qu'il affiche tous les résultats (pour Evoli)
+      return ($resultSet->count() ? $resultSet->current() : null);
   }
 }

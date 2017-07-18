@@ -26,4 +26,9 @@ interface PokemonRepository extends RepositoryInterface
   public function update(Pokemon $pokemon);
 
   public function delete($pokemonId);
+
+  /**
+   * @return Pokemon|null
+   */
+  public function findEvolution($pokemonId);
 }

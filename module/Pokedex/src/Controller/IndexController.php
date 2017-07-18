@@ -60,15 +60,32 @@ class IndexController extends AbstractActionController
 
   public function viewPokemonAction()
   {
+    $evolutionB = null;
     $pokemon = $this->pokedexService->find(
       $this->params()->fromRoute('pokemonSlug')
     );
+
+    $evolution = $this->pokedexService->findEvolution(
+      $pokemon->getIdNational()
+    );
+
+    if($evolution) {
+      $evolutionB = $this->pokedexService->findEvolution(
+           $evolution->getIdNational()
+         );
+    }
 
     if (is_null($pokemon)) {
       $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
     }
 
-    return new ViewModel(['pokemon' => $pokemon]);
+    $variables = [
+      'pokemon'   => $pokemon,
+      'evolution' => $evolution,
+      'evolutionB' => $evolutionB
+    ];
+
+    return new ViewModel($variables);
   }
 
   public function deleteAction()

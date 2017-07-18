@@ -6,6 +6,8 @@ class Pokemon
 {
     protected $id;
 
+    protected $id_national;
+
     protected $name;
 
     protected $typeA;
@@ -34,6 +36,16 @@ class Pokemon
     public function setName($name)
     {
       $this->name = $name;
+    }
+
+    public function getIdNational()
+    {
+      return $this->id_national;
+    }
+
+    public function setIdNational($id_national)
+    {
+      $this->id_national = $id_national;
     }
 
     public function getTypeA()
