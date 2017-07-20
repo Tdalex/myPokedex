@@ -32,20 +32,55 @@ div.container a.navbar-brand > img {
     margin-top: -2px;
 }
 
-#pokemons .col-md-3 {
+#pokemons .col-md-4 {
     box-shadow: 10px 10px 3px #ddd;
     height: 200px;
     margin-bottom: 30px;
     margin-left: 50px;
+    width: 330px;
+}
+
+.types-index {
+    width: 180%;
+    text-align: center;
+}
+
+.header {
+    font-size: 25px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.col-md-4.hello-user {
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+.logout {
+    margin-top: 10px;
+    font-size: 20px;
 }
 
 .types {
     width: 100%;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 30px;
     /*border: 1px solid red;*/
 }
 
+.description {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.evolutions {
+    font-size: 28px;
+    font-weight: 700;
+}
+
 .col-md-2 {
-    border-radius: 10px;
+    border-radius: 20px;
     margin-left: 10px;
 }
 
