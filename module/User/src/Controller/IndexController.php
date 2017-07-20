@@ -60,7 +60,7 @@ class IndexController extends AbstractActionController
             $data['email'],
             $data['password']
           );
-
+          //var_dump($loginResult); 
         if ($loginResult === true) {
           $this->flashMessenger()->addSuccessMessage('You are now logged in');
         } else {

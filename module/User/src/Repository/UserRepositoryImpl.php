@@ -52,7 +52,6 @@ class UserRepositoryImpl implements UserRepository
       'password',
       $callback
     );
-
     return $authenticationAdapter;
   }
 }

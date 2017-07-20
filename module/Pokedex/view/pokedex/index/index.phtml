@@ -1,6 +1,8 @@
 <div>
   <h3>My Pokedex</h3>
+  <?php if($this->identity()){ ?>
   <a class="btn btn-primary" href="<?php echo $this->url("pokedex_add"); ?>">Add a new pokemon</a>
+  <?php } ?>
 </div>
 <br><br>
 <?php if (!empty($this->pokemons)) : ?>

@@ -34,6 +34,9 @@ class IndexController extends AbstractActionController
 
   public function addAction()
   {
+     if(!$this->identity()){
+      return $this->redirect()->toRoute('pokedex_home');
+     }
     $form = new Add();
 
     $variables = [
@@ -90,12 +93,18 @@ class IndexController extends AbstractActionController
 
   public function deleteAction()
   {
+    if(!$this->identity()){
+      return $this->redirect()->toRoute('pokedex_home');
+     }
     $this->pokedexService->delete($this->params()->fromRoute('pokemonId'));
     $this->redirect()->toRoute('pokedex_home');
   }
 
   public function editAction()
   {
+    if(!$this->identity()){
+      return $this->redirect()->toRoute('pokedex_home');
+     }
     $form = new Edit();
     $variables = ['form' => $form];
 

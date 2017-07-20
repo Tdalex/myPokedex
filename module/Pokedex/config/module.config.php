@@ -9,7 +9,7 @@ return [
       'pokedex_home' => [
         'type' => 'Literal',
         'options' => [
-          'route' => '/pokedex',
+          'route' => '/',
           'defaults' => [
             'controller'  => 'Pokedex\Controller\Index',
             'action'      => 'index'
@@ -20,7 +20,7 @@ return [
             'paged' => [
                 'type' => 'Segment',
                 'options' => [
-                    'route' => '/page/:page' ,   // /pokedex/page/:page
+                    'route' => '/page/:page' ,   // /page/:page
                     'constraints' => [ 'page' => '[0-9]+' ],
                     'defaults' => [
                         'controller' => 'Pokedex\Controller\Index',
@@ -33,7 +33,7 @@ return [
       'pokedex_add' => [
         'type' => 'Literal',
         'options' => [
-          'route' => '/pokedex/pokemon/add',
+          'route' => '/pokemon/add',
           'defaults' => [
             'controller'  => 'Pokedex\Controller\Index',
             'action'      => 'add'
@@ -43,7 +43,7 @@ return [
       'edit_pokemon' => [
         'type' => 'Segment',
         'options' => [
-          'route' => '/pokedex/pokemon/edit/:pokemonId',
+          'route' => '/pokemon/edit/:pokemonId',
           'constraints' => [
             'pokemonId' => '[0-9]+'
           ],
@@ -56,7 +56,7 @@ return [
       'delete_pokemon' => [
         'type' => 'Segment',
         'options' => [
-          'route' => '/pokedex/pokemon/delete/:pokemonId',
+          'route' => '/pokemon/delete/:pokemonId',
           'constraints' => [
             'pokemonId' => '[0-9]+'
           ],
@@ -69,7 +69,7 @@ return [
       'display_pokemon' => [
         'type' => 'Segment',
         'options' => [
-          'route' => '/pokedex/pokemons/:pokemonSlug',
+          'route' => '/pokemons/:pokemonSlug',
           'contraints' => [
             'pokemonSlug'      => '[a-zA-Z0-9-]+',
           ],
@@ -82,7 +82,7 @@ return [
       'api_pokedex_pokemons' => [
         'type'  => 'Segment',
         'options' => [
-          'route' => '/api/pokedex/pokemon[/:id]',
+          'route' => '/api/pokemon[/:id]',
           'defaults' => [
             'controller'  => 'Pokedex\Controller\PokedexPokemon'
           ]

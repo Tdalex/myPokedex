@@ -213,11 +213,18 @@ INSERT INTO `pokemon` (`id`, `id_national`, `name`, `typeA`, `typeB`, `parent_id
 -- Structure de la table `user`
 --
 
-CREATE TABLE `user` (
-  `Id_user` int(11) NOT NULL,
-  `Login` varchar(45) NOT NULL,
-  `Password` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE user
+(
+         id int PRIMARY KEY NOT NULL,
+         first_name varchar(50) NOT NULL,
+         last_name varchar(50) NOT NULL,
+         email varchar(100) NOT NULL,
+         password char(60) NOT NULL,
+         created int NOT NULL,
+         user_group int NOT NULL
+);
+
+ALTER TABLE user MODIFY id INT AUTO_INCREMENT;
 
 --
 -- Index pour les tables exportées
@@ -239,8 +246,6 @@ ALTER TABLE `pokemon`
 --
 -- Index pour la table `user`
 --
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`Id_user`);
 
 --
 -- AUTO_INCREMENT pour les tables exportées
@@ -255,8 +260,6 @@ ALTER TABLE `lastseen`
 --
 -- AUTO_INCREMENT pour la table `user`
 --
-ALTER TABLE `user`
-  MODIFY `Id_user` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Contraintes pour les tables exportées
 --
