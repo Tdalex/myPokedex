@@ -9,7 +9,7 @@ return [
       'pokedex_home' => [
         'type' => 'Literal',
         'options' => [
-          'route' => '/',
+          'route' => '/pokedex',
           'defaults' => [
             'controller'  => 'Pokedex\Controller\Index',
             'action'      => 'index'
@@ -33,7 +33,7 @@ return [
       'pokedex_add' => [
         'type' => 'Literal',
         'options' => [
-          'route' => '/pokemon/add',
+          'route' => '/pokedex/pokemon/add',
           'defaults' => [
             'controller'  => 'Pokedex\Controller\Index',
             'action'      => 'add'
@@ -43,7 +43,7 @@ return [
       'edit_pokemon' => [
         'type' => 'Segment',
         'options' => [
-          'route' => '/pokemon/edit/:pokemonId',
+          'route' => '/pokedex/pokemon/edit/:pokemonId',
           'constraints' => [
             'pokemonId' => '[0-9]+'
           ],
@@ -56,7 +56,7 @@ return [
       'delete_pokemon' => [
         'type' => 'Segment',
         'options' => [
-          'route' => '/pokemon/delete/:pokemonId',
+          'route' => '/pokedex/pokemon/delete/:pokemonId',
           'constraints' => [
             'pokemonId' => '[0-9]+'
           ],
