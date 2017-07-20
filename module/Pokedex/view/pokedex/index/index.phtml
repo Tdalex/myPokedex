@@ -8,7 +8,7 @@
 <?php if (!empty($this->pokemons)) : ?>
 <div id="pokemons">
     <?php foreach ($this->pokemons as $pokemon) : ?>
-          <div class="col-md-3">
+          <div class="col-md-4">
             <div class="header-box">
               <?php 
                 $idNational = $pokemon->getIdNational();
@@ -32,7 +32,7 @@
               <img src="/img/icone/<?php echo $pokemon->getIdNational(); ?>.png">
               <img src="/img/icone_shiny/<?php echo $pokemon->getIdNational(); ?>.png">
             </div>
-            <div class="types">
+            <div class="types-index">
               <div class="col-md-2 <?php echo $pokemon->getTypeA(); ?>">
                 <?php echo $this->escapeHtml($pokemon->getTypeA()); ?>
               </div>

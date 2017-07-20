@@ -52,7 +52,7 @@ $pokemon = $this->pokemon;
     <?php echo nl2br($this->escapeHtml($pokemon->getDescription())); ?>
   </div>
     <!-- récupérer les évolutions -->
-    <h4>Evolutions :</h4>
+    <h4 class="evolutions">Evolutions :</h4>
     <?php if ($evolution != null){ ?>
       <strong>
         <a href="<?php echo $this->url(
