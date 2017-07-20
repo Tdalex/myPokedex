@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Ven 14 Juillet 2017 à 16:31
+-- Généré le :  Jeu 20 Juillet 2017 à 22:58
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -32,8 +32,18 @@ CREATE TABLE `lastseen` (
   `longitude` float NOT NULL,
   `ville` varchar(50) NOT NULL,
   `id_pokemon` int(11) NOT NULL,
-  `date` datetime DEFAULT NULL
+  `date` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `lastseen`
+--
+
+INSERT INTO `lastseen` (`id`, `latitude`, `longitude`, `ville`, `id_pokemon`, `date`) VALUES
+(5, 43.6109, 3.8772, 'Montpellier', 4, '2017-07-20 22:27:00'),
+(6, 43.6109, 3.8772, 'Montpellier', 4, '2017-07-20 22:27:00'),
+(7, 43.6109, 3.8772, 'Montpellier', 4, '2017-07-20 22:27:00'),
+(8, 43.6109, 3.8772, 'Montpellier', 1, '2017-07-20 15:00:00');
 
 -- --------------------------------------------------------
 
@@ -206,7 +216,8 @@ INSERT INTO `pokemon` (`id`, `id_national`, `name`, `typeA`, `typeB`, `parent_id
 (148, 148, 'Draco', 'Dragon', NULL, 147, 'Un Pokémon légendaire plein de charme. Il peut contrôler les variations climatiques.Selon certains, son corps est baigné d\'une étrange aura, lui donnant un air mystique.'),
 (149, 149, 'Dracolosse', 'Dragon', 'Vol', 148, 'Un Pokémon marin extrêmement rare. On dit qu\'il est aussi intelligent que l\'homme.On raconte que ce Pokémon vit quelque part dans la mer et qu\'il peut voler. rien n\'est moins sûr.'),
 (150, 150, 'Mewtwo', 'Psy', NULL, NULL, 'Il est le fruit de nombreuses expériences génétiques horribles et malsaines.Son ADN est le même que celui de MEW mais sa taille et son aspect sont très différents.'),
-(151, 151, 'Mew', 'Psy', NULL, NULL, 'Unique et rare, son existence est remise en cause par les experts. Peu nombreux sont ceux qui l\'ont vu.Vu au microscope, le pelage de ce Pokémon est fin, soyeux et très délicat.');
+(151, 151, 'Mew', 'Psy', NULL, NULL, 'Unique et rare, son existence est remise en cause par les experts. Peu nombreux sont ceux qui l\'ont vu.Vu au microscope, le pelage de ce Pokémon est fin, soyeux et très délicat.'),
+(152, 155, 'testpokemon', 'Spectre', '', 0, 'test du pokemon hello');
 
 -- --------------------------------------------------------
 
@@ -214,18 +225,22 @@ INSERT INTO `pokemon` (`id`, `id_national`, `name`, `typeA`, `typeB`, `parent_id
 -- Structure de la table `user`
 --
 
-CREATE TABLE `user`
-(
-         `id` int PRIMARY KEY NOT NULL,
-         `first_name` varchar(50) NOT NULL,
-         `last_name` varchar(50) NOT NULL,
-         `email` varchar(100) NOT NULL,
-         `password` char(60) NOT NULL,
-         `created` int NOT NULL,
-         `user_group` int DEFAULT NULL
-);
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
+  `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` char(60) NOT NULL,
+  `created` int(11) NOT NULL,
+  `user_group` int(11) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-ALTER TABLE `user` MODIFY `id` INT AUTO_INCREMENT;
+--
+-- Contenu de la table `user`
+--
+
+INSERT INTO `user` (`id`, `first_name`, `last_name`, `email`, `password`, `created`, `user_group`) VALUES
+(2, 'toto', 'toto', 'toto@toto.com', '$2y$12$jfX9bsEf3jluOhsd4/Qvr.1etE/8.cQhxxFDrk8FTBZd3HvazU30a', 1500552584, NULL);
 
 --
 -- Index pour les tables exportées
@@ -247,20 +262,28 @@ ALTER TABLE `pokemon`
 --
 -- Index pour la table `user`
 --
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT pour les tables exportées
 --
-ALTER TABLE `pokemon`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT pour la table `lastseen`
 --
 ALTER TABLE `lastseen`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT pour la table `pokemon`
+--
+ALTER TABLE `pokemon`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
 --
 -- AUTO_INCREMENT pour la table `user`
 --
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Contraintes pour les tables exportées
 --
