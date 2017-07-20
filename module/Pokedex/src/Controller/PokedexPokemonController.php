@@ -5,6 +5,7 @@ namespace Pokedex\Controller;
 use Zend\Mvc\Controller\AbstractRestfulController;
 use Zend\View\Model\JsonModel;
 use Pokedex\Entity\Pokemon;
+use Pokedex\Entity\Localisation;
 use Zend\Cache\StorageFactory;
 
 class PokedexPokemonController extends AbstractRestfulController
@@ -136,5 +137,39 @@ class PokedexPokemonController extends AbstractRestfulController
     $pokemon->setDescription($data['description']);
 
     return $pokemon;
+  }
+
+  public function addLocalisationAction(){
+    $idPokemon = $this->params()->fromRoute('pokemonId');
+    //récupérer l'ipde l'utilisateur pour avoir ses coordonnées géographiques
+    //$ip  = !empty($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'];
+    $ip = '86.75.236.178';
+    $url = "http://freegeoip.net/json/$ip";
+    $ch  = curl_init();
+
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+    $data = curl_exec($ch);
+    curl_close($ch);
+
+    if ($data) {
+      $location = json_decode($data);
+
+      $latitude = $location->latitude;
+      $longitude = $location->longitude;
+      $city = $location->city;
+
+    }
+      
+    $localisation = new Localisation();
+    $localisation->setLatitude($latitude);
+    $localisation->setLongitude($longitude);
+    $localisation->setVille($city);
+    $localisation->setPokemonId($idPokemon);
+    $localisation->setDate(date('Y-m-d H:i'));
+
+    $this->pokedexService->saveLocalisation($localisation);
+    return $this->redirect()->toRoute('pokedex_home');
   }
 }

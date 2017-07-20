@@ -78,6 +78,10 @@ class IndexController extends AbstractActionController
          );
     }
 
+    $localisations = $this->pokedexService->getLocalisation(
+      $pokemon->getId()
+    );
+
     if (is_null($pokemon)) {
       $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
     }
@@ -85,7 +89,8 @@ class IndexController extends AbstractActionController
     $variables = [
       'pokemon'   => $pokemon,
       'evolution' => $evolution,
-      'evolutionB' => $evolutionB
+      'evolutionB' => $evolutionB,
+      'localisations' => $localisations
     ];
 
     return new ViewModel($variables);

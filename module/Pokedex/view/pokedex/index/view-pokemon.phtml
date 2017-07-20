@@ -11,6 +11,7 @@ $pokemon = $this->pokemon;
   <i class="glyphicon glyphicon-remove"></i> Delete
 </a>
 <?php } ?>
+<a class="btn btn-primary" href="<?php echo $this->url("api_pokedex_pokemons", ['pokemonId' => $pokemon->getId()]); ?>">Add a new localisation</a>
 <hr />
 <div class="col-md-3">
   <img src="/img/sprites/<?php echo $pokemon->getIdNational(); ?>.gif">
@@ -76,8 +77,31 @@ $pokemon = $this->pokemon;
     <?php
       }
     } else
-      echo 'aucune évolution pour ce pokemon.';
+      echo 'Aucune évolution pour ce pokemon ...';
     ?>
+  </div>
+
+  <div class="localisation">
+    <h4>Localisations :</h4>
+    <ul>
+    <?php
+      if (empty($localisations)) {
+        echo 'Aucune localisation n\'a été trouvée pour ce pokemon ...';
+      } else {
+        for ($i=0; $i<sizeof($localisations); $i++) {
+          $date = strtotime($localisations[$i]->getDate());
+          $now = strtotime('now');
+          $moinsTrente = strtotime('-30 minutes');
+          if ($date >= $moinsTrente && $date <= $now) {
+            echo '<li>'.$localisations[$i]->getVille().'</li>';
+          }
+          else {
+            echo 'Aucune localisation enregistrée dans les 30 dernières minutes ...';
+          }
+        }
+      }
+    ?>
+    </ul>
   </div>
 </div>
 <br />

@@ -4,10 +4,13 @@ namespace Pokedex\Repository;
 
 use Application\Repository\RepositoryInterface;
 use Pokedex\Entity\Pokemon;
+use Pokedex\Entity\Localisation;
 
 interface PokemonRepository extends RepositoryInterface
 {
   public function save(Pokemon $pokemon);
+
+  public function saveLocalisation(Localisation $localisation);
 
   public function fetchAll();
 
@@ -31,4 +34,9 @@ interface PokemonRepository extends RepositoryInterface
    * @return Pokemon|null
    */
   public function findEvolution($pokemonId);
+
+  /**
+   * @return Localisation|null
+   */
+  public function getLocalisation($pokemonId);
 }

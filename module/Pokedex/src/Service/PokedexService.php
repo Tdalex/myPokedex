@@ -3,10 +3,13 @@
 namespace Pokedex\Service;
 
 use Pokedex\Entity\Pokemon;
+use Pokedex\Entity\Localisation;
 
 interface PokedexService
 {
   public function save(Pokemon $pokemon);
+
+  public function saveLocalisation(Localisation $localisation);
 
   public function fetchAll();
 
@@ -30,4 +33,9 @@ interface PokedexService
    * @return Pokemon|null
    */
   public function findEvolution($pokemonId);
+
+  /**
+   * @return Localisation|null
+   */
+  public function getLocalisation($pokemonId);
 }

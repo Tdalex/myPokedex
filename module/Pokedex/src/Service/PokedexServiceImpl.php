@@ -3,6 +3,7 @@
 namespace Pokedex\Service;
 
 use Pokedex\Entity\Pokemon;
+use Pokedex\Entity\Localisation;
 use Pokedex\Service\PokedexService;
 
 class PokedexServiceImpl implements PokedexService
@@ -22,6 +23,11 @@ class PokedexServiceImpl implements PokedexService
   public function save(Pokemon $pokemon)
   {
     $this->pokemonRepository->save($pokemon);
+  }
+
+  public function saveLocalisation(Localisation $localisation) 
+  {
+    $this->pokemonRepository->saveLocalisation($localisation);
   }
 
   public function fetchAll()
@@ -66,5 +72,12 @@ class PokedexServiceImpl implements PokedexService
   public function findEvolution($pokemonId)
   {
     return $this->pokemonRepository->findEvolution($pokemonId);
+  }
+
+  /**
+   * @return Localisation|null
+   */
+  public function getLocalisation($pokemonId) {
+    return $this->pokemonRepository->getLocalisation($pokemonId);
   }
 }

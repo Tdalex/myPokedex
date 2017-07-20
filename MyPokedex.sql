@@ -27,11 +27,12 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `lastseen` (
-  `Id_lastSeen` int(11) NOT NULL,
-  `Latitude` float NOT NULL,
-  `Longitude` float NOT NULL,
-  `Pokemon_Id_Pokemon` int(11) NOT NULL,
-  `Date` datetime DEFAULT NULL
+  `id` int(11) NOT NULL,
+  `latitude` float NOT NULL,
+  `longitude` float NOT NULL,
+  `ville` varchar(50) NOT NULL,
+  `id_pokemon` int(11) NOT NULL,
+  `date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -213,18 +214,18 @@ INSERT INTO `pokemon` (`id`, `id_national`, `name`, `typeA`, `typeB`, `parent_id
 -- Structure de la table `user`
 --
 
-CREATE TABLE user
+CREATE TABLE `user`
 (
-         id int PRIMARY KEY NOT NULL,
-         first_name varchar(50) NOT NULL,
-         last_name varchar(50) NOT NULL,
-         email varchar(100) NOT NULL,
-         password char(60) NOT NULL,
-         created int NOT NULL,
-         user_group int NOT NULL
+         `id` int PRIMARY KEY NOT NULL,
+         `first_name` varchar(50) NOT NULL,
+         `last_name` varchar(50) NOT NULL,
+         `email` varchar(100) NOT NULL,
+         `password` char(60) NOT NULL,
+         `created` int NOT NULL,
+         `user_group` int DEFAULT NULL
 );
 
-ALTER TABLE user MODIFY id INT AUTO_INCREMENT;
+ALTER TABLE `user` MODIFY `id` INT AUTO_INCREMENT;
 
 --
 -- Index pour les tables exportées
@@ -234,8 +235,8 @@ ALTER TABLE user MODIFY id INT AUTO_INCREMENT;
 -- Index pour la table `lastseen`
 --
 ALTER TABLE `lastseen`
-  ADD PRIMARY KEY (`Id_lastSeen`,`Pokemon_Id_Pokemon`),
-  ADD KEY `fk_Last_seen_Pokemon_idx` (`Pokemon_Id_Pokemon`);
+  ADD PRIMARY KEY (`id`,`id_pokemon`),
+  ADD KEY `fk_Last_seen_Pokemon_idx` (`id_pokemon`);
 
 --
 -- Index pour la table `pokemon`
@@ -256,7 +257,7 @@ ALTER TABLE `pokemon`
 -- AUTO_INCREMENT pour la table `lastseen`
 --
 ALTER TABLE `lastseen`
-  MODIFY `Id_lastSeen` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `user`
 --
@@ -268,7 +269,7 @@ ALTER TABLE `lastseen`
 -- Contraintes pour la table `lastseen`
 --
 ALTER TABLE `lastseen`
-  ADD CONSTRAINT `fk_Last_seen_Pokemon` FOREIGN KEY (`Pokemon_Id_Pokemon`) REFERENCES `pokemon` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_Last_seen_Pokemon` FOREIGN KEY (`id_pokemon`) REFERENCES `pokemon` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

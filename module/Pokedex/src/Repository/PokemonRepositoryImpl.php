@@ -3,11 +3,13 @@
 namespace Pokedex\Repository;
 
 use Pokedex\Entity\Hydrator\PokemonHydrator;
+use Pokedex\Entity\Hydrator\LocalisationHydrator;
 use Zend\Hydrator\Aggregate\AggregateHydrator;
 use Zend\Db\ResultSet\HydratingResultSet;
 use Pokedex\Repository\PokemonRepository;
 use Zend\Db\Adapter\AdapterAwareTrait;
 use Pokedex\Entity\Pokemon;
+use Pokedex\Entity\Localisation;
 
 class PokemonRepositoryImpl implements PokemonRepository
 {
@@ -32,6 +34,35 @@ class PokemonRepositoryImpl implements PokemonRepository
           'description' => $pokemon->getDescription()
         ])
         ->into('pokemon');
+     $statement = $sql->prepareStatementForSqlObject($insert);
+     $statement->execute();
+     $this->adapter->getDriver()
+      ->getConnection()
+      ->commit();
+   } catch (\Exception $e) {
+        $this->adapter->getDriver()
+          ->getConnection()->rollback();
+   }
+  }
+
+  public function saveLocalisation(Localisation $localisation)
+  {
+    try {
+          $this->adapter
+            ->getDriver()
+            ->getConnection()
+            ->beginTransaction();
+
+      $sql = new \Zend\Db\Sql\Sql($this->adapter);
+      $insert = $sql->insert()
+        ->values([
+          'latitude' => $localisation->getLatitude(),
+          'longitude' => $localisation->getLongitude(),
+          'ville'     => $localisation->getVille(),
+          'id_pokemon' => $localisation->getPokemonId(),
+          'date'       => $localisation->getDate()
+        ])
+        ->into('lastseen');
      $statement = $sql->prepareStatementForSqlObject($insert);
      $statement->execute();
      $this->adapter->getDriver()
@@ -231,5 +262,41 @@ class PokemonRepositoryImpl implements PokemonRepository
 
       //changer le resultset->current pour qu'il affiche tous les résultats (pour Evoli)
       return ($resultSet->count() ? $resultSet->current() : null);
+  }
+
+  /**
+   * @return Localisation|null
+   */
+  public function getLocalisation($pokemonId)
+  {
+    $sql = new \Zend\Db\Sql\Sql($this->adapter);
+      $select = $sql->select();
+      $select->columns([
+        'ville',
+        'id_pokemon',
+        'date'
+      ])->from(
+        ['ls' => 'lastseen']
+      )->where(
+        ['ls.id_pokemon' => $pokemonId]
+      );
+
+      $statement = $sql->prepareStatementForSqlObject($select);
+      $results = $statement->execute();
+
+      $hydrator = new AggregateHydrator();
+      $hydrator->add(new LocalisationHydrator());
+
+      $resultSet = new HydratingResultSet($hydrator, new Localisation());
+      $resultSet->initialize($results);
+
+      $localisations = [];
+      foreach ($resultSet as $loc) {
+        /**
+           * @var \Pokedex\Entity\Localisation $loc
+           */
+          $localisations[] = $loc;
+      }
+      return $localisations;    
   }
 }

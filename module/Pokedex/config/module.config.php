@@ -82,9 +82,13 @@ return [
       'api_pokedex_pokemons' => [
         'type'  => 'Segment',
         'options' => [
-          'route' => '/api/pokemon[/:id]',
+          'route' => '/api/pokemon/:pokemonId',
+          'constraints' => [
+            'pokemonId' => '[0-9]+'
+          ],
           'defaults' => [
-            'controller'  => 'Pokedex\Controller\PokedexPokemon'
+            'controller'  => 'Pokedex\Controller\PokedexPokemon',
+            'action'      => 'addLocalisation'
           ]
         ]
       ],
