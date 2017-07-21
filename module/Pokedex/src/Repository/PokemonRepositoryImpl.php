@@ -259,9 +259,8 @@ class PokemonRepositoryImpl implements PokemonRepository
 
       $resultSet = new HydratingResultSet($hydrator, new Pokemon());
       $resultSet->initialize($results);
-
       //changer le resultset->current pour qu'il affiche tous les résultats (pour Evoli)
-      return ($resultSet->count() ? $resultSet->current() : null);
+      return ($resultSet->count() ? $resultSet: null);
   }
 
   /**

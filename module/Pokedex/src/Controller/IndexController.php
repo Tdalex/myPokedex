@@ -73,10 +73,10 @@ class IndexController extends AbstractActionController
     $evolution = $this->pokedexService->findEvolution(
       $pokemon->getIdNational()
     );
-
+	
     if($evolution) {
       $evolutionB = $this->pokedexService->findEvolution(
-           $evolution->getIdNational()
+           $evolution->current()->getIdNational()
          );
     }
 

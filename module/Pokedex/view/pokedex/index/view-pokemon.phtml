@@ -54,14 +54,20 @@ $pokemon = $this->pokemon;
     <!-- récupérer les évolutions -->
     <h4 class="evolutions">Evolutions :</h4>
     <?php if ($evolution != null){ ?>
+	<?php while($evolution->valid()){ ?>
       <strong>
         <a href="<?php echo $this->url(
           'display_pokemon', [
-            'pokemonSlug' => $evolution->getName()
+            'pokemonSlug' => $evolution->current()->getName()
           ]); ?>">
-          <?php echo $this->escapeHtml($evolution->getName()); ?>
+          <?php echo $this->escapeHtml($evolution->current()->getName()); ?>
         </a>
       </strong>
+	<?php $evolution->next();
+		if($evolution->valid()){
+			echo ', ';
+		}?>
+	<?php } ?>
     <?php
       if($evolutionB != null) {
         echo ', ';
