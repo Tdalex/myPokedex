@@ -216,7 +216,7 @@ INSERT INTO `pokemon` (`id`, `id_national`, `name`, `typeA`, `typeB`, `parent_id
 (148, 148, 'Draco', 'Dragon', NULL, 147, 'Un Pokémon légendaire plein de charme. Il peut contrôler les variations climatiques.Selon certains, son corps est baigné d\'une étrange aura, lui donnant un air mystique.'),
 (149, 149, 'Dracolosse', 'Dragon', 'Vol', 148, 'Un Pokémon marin extrêmement rare. On dit qu\'il est aussi intelligent que l\'homme.On raconte que ce Pokémon vit quelque part dans la mer et qu\'il peut voler. rien n\'est moins sûr.'),
 (150, 150, 'Mewtwo', 'Psy', NULL, NULL, 'Il est le fruit de nombreuses expériences génétiques horribles et malsaines.Son ADN est le même que celui de MEW mais sa taille et son aspect sont très différents.'),
-(151, 151, 'Mew', 'Psy', NULL, NULL, 'Unique et rare, son existence est remise en cause par les experts. Peu nombreux sont ceux qui l\'ont vu.Vu au microscope, le pelage de ce Pokémon est fin, soyeux et très délicat.'),
+(151, 151, 'Mew', 'Psy', NULL, NULL, 'Unique et rare, son existence est remise en cause par les experts. Peu nombreux sont ceux qui l\'ont vu.Vu au microscope, le pelage de ce Pokémon est fin, soyeux et très délicat.');
 
 -- --------------------------------------------------------
 
@@ -290,8 +290,6 @@ ALTER TABLE `user`
 --
 -- Contraintes pour la table `lastseen`
 --
-ALTER TABLE `lastseen`
-  ADD CONSTRAINT `fk_Last_seen_Pokemon` FOREIGN KEY (`id_pokemon`) REFERENCES `pokemon` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

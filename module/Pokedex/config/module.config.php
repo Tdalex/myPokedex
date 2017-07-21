@@ -30,6 +30,30 @@ return [
             ]
         ]
       ],
+	  'pokedex_homepage' => [
+        'type' => 'Literal',
+        'options' => [
+          'route' => '/',
+          'defaults' => [
+            'controller'  => 'Pokedex\Controller\Index',
+            'action'      => 'index'
+          ],
+        ],
+        'may_terminate' => true,
+        'child_routes' => [
+            'paged' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route' => '/page/:page' ,   // /page/:page
+                    'constraints' => [ 'page' => '[0-9]+' ],
+                    'defaults' => [
+                        'controller' => 'Pokedex\Controller\Index',
+                        'action' => 'index'
+                    ]
+                ]
+            ]
+        ]
+      ],
       'pokedex_add' => [
         'type' => 'Literal',
         'options' => [
