@@ -63,6 +63,7 @@ class IndexController extends AbstractActionController
           //var_dump($loginResult); 
         if ($loginResult === true) {
           $this->flashMessenger()->addSuccessMessage('You are now logged in');
+		  return $this->redirect()->toRoute('pokedex_home');
         } else {
           $this->flashMessenger()->addWarningMessage('Invalid credentials');
         }
@@ -79,6 +80,6 @@ class IndexController extends AbstractActionController
     $authenticationService = $this->userService->getAuthenticationService();
     $authenticationService->clearIdentity();
 
-    return $this->redirect()->toRoute('login');
+    return $this->redirect()->toRoute('pokedex_home');
   }
 }
