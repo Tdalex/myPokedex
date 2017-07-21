@@ -53,7 +53,9 @@ class IndexController extends AbstractActionController
         $form->setData($data);
         if ($form->isValid()) {
           $this->pokedexService->save($pokedexPokemon);
-          return $this->redirect()->toRoute('pokedex_home');
+		  return $this->redirect()->toRoute('display_pokemon', array(
+			'pokemonSlug' => $pokedexPokemon->getName(),
+		  ));
         }
     }
 
@@ -121,7 +123,9 @@ class IndexController extends AbstractActionController
       $form->setData($data); // KEY VALUE ARRAY
       if ($form->isValid()) {
         $this->pokedexService->update($pokedexPokemon);
-        return $this->redirect()->toRoute('pokedex_home');
+		return $this->redirect()->toRoute('display_pokemon', array(
+			'pokemonSlug' => $pokedexPokemon->getName(),
+		));
       }
     } else {  // VIEWING POST
         $pokemon = $this->pokedexService

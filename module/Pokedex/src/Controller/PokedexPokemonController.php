@@ -170,6 +170,8 @@ class PokedexPokemonController extends AbstractRestfulController
     $localisation->setDate(date('Y-m-d H:i'));
 
     $this->pokedexService->saveLocalisation($localisation);
-    return $this->redirect()->toRoute('pokedex_home');
+    return $this->redirect()->toRoute('display_pokemon', array(
+		'pokemonSlug' => $this->pokedexService->findById($idPokemon)->getName(),
+	));
   }
 }
